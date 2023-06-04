@@ -1,9 +1,9 @@
 .loginPage {
-  background: #1f2023;
+  background: linear-gradient(to right, #000428, #004e92);
 }
 
 .loginForm {
-  background-color: rgba(1, 32, 93, 0.6);
+  background: #212731;
   color: white;
 }
 
