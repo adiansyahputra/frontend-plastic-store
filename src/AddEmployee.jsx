@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function AddEmployee() {
   const [data, setData] = useState({
@@ -10,10 +12,30 @@ function AddEmployee() {
     image: '',
   });
 
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formdata = new FormData();
+    formdata.append('name', data.name);
+    formdata.append('email', data.email);
+    formdata.append('password', data.password);
+    formdata.append('address', data.address);
+    formdata.append('salary', data.salary);
+    formdata.append('image', data.image);
+    axios
+      .post('http://localhost:8081/create', formdata)
+      .then((res) => {
+        console.log(res);
+        navigate('/employee');
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="d-flex flex-column align-items-center pt-4">
       <h2>Add Employee</h2>
-      <form className="row g-3 w-50">
+      <form className="row g-3 w-50" onSubmit={handleSubmit}>
         <div className="col-12">
           <label htmlFor="inputName" className="form-label">
             Name
